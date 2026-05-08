@@ -403,12 +403,81 @@ function Steps() {
   );
 }
 
+const basicPricing = {
+  USD: { current: "$34.99", original: "$40.00", suffix: "USD" },
+  NIO: { current: "C$ 1,290", original: "C$ 1,475", suffix: "NIO" },
+  CRC: { current: "₡ 16,025", original: "₡ 20,500", suffix: "CRC" },
+  HNL: { current: "L 935", original: "L 990", suffix: "HNL" },
+  GTQ: { current: "Q 268", original: "Q 310", suffix: "GTQ" },
+} as const;
+
+const premiumPricing = {
+  USD: { current: "$94.99", original: "$120.00", suffix: "USD" },
+  NIO: { current: "C$ 3,499", original: "C$ 4,400", suffix: "NIO" },
+  CRC: { current: "₡ 43,499", original: "₡ 61,000", suffix: "CRC" },
+  HNL: { current: "L 2,535", original: "L 3,000", suffix: "HNL" },
+  GTQ: { current: "Q 726", original: "Q 930", suffix: "GTQ" },
+} as const;
+
+type Currency = keyof typeof basicPricing;
+
+const flagOptions: { code: Currency; flag: string; label: string }[] = [
+  { code: "GTQ", flag: "🇬🇹", label: "GTQ" },
+  { code: "HNL", flag: "🇭🇳", label: "HNL" },
+  { code: "NIO", flag: "🇳🇮", label: "NIO" },
+  { code: "CRC", flag: "🇨🇷", label: "CRC" },
+];
+
+function PriceDisplay({
+  data,
+  featured,
+}: {
+  data: { current: string; original: string; suffix: string };
+  featured: boolean;
+}) {
+  return (
+    <div className="mt-6 min-h-[110px]">
+      <span className="text-xs text-muted-foreground line-through">
+        Antes {data.original}
+      </span>
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={data.current + data.suffix}
+          initial={{ opacity: 0, filter: "blur(6px)", y: 6 }}
+          animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
+          exit={{ opacity: 0, filter: "blur(6px)", y: -6 }}
+          transition={{ duration: 0.25, ease: "easeOut" }}
+          className="flex items-end gap-2 flex-wrap"
+        >
+          <span
+            className={`text-5xl sm:text-6xl font-semibold tracking-tight ${
+              featured ? "bg-clip-text text-transparent" : ""
+            }`}
+            style={featured ? { backgroundImage: "var(--gradient-gold)" } : undefined}
+          >
+            {data.current}
+          </span>
+          <span className="text-muted-foreground mb-2 text-sm">
+            {data.suffix} · pago único
+          </span>
+        </motion.div>
+      </AnimatePresence>
+    </div>
+  );
+}
+
 function Pricing() {
+  const [activeCurrency, setActiveCurrency] = useState<Currency>("USD");
+
+  const handleFlagClick = (code: Currency) => {
+    setActiveCurrency((prev) => (prev === code ? "USD" : code));
+  };
+
   const plans = [
     {
       name: "Plan Impulso",
-      price: "$35",
       sub: "Lo esencial para vender más rápido",
+      data: basicPricing[activeCurrency],
       features: [
         { icon: Globe2, t: "Sitio web en subdominio" },
         { icon: Camera, t: "Galería optimizada" },
@@ -419,8 +488,8 @@ function Pricing() {
     },
     {
       name: "Plan Premium",
-      price: "$95",
       sub: "Marca blanca y herramientas profesionales",
+      data: premiumPricing[activeCurrency],
       features: [
         { icon: Sparkles, t: "Todo lo del Plan Impulso" },
         { icon: Globe2, t: "Dominio web propio (.com)" },
@@ -441,9 +510,52 @@ function Pricing() {
           <h2 className="mt-3 text-3xl sm:text-5xl font-semibold tracking-tight">
             Precio único. Sin mensualidades ni comisiones.
           </h2>
+          <p className="mt-4 text-sm text-muted-foreground">
+            Elegí tu moneda local. Tocá la bandera activa para volver a USD.
+          </p>
         </motion.div>
 
-        <div className="mt-14 grid md:grid-cols-2 gap-6">
+        <motion.div
+          {...fadeUp}
+          className="mt-10 flex items-center justify-center gap-3 sm:gap-4 flex-wrap"
+        >
+          {flagOptions.map(({ code, flag, label }) => {
+            const isActive = activeCurrency === code;
+            return (
+              <button
+                key={code}
+                onClick={() => handleFlagClick(code)}
+                aria-pressed={isActive}
+                className={`relative flex flex-col items-center gap-1.5 rounded-2xl px-4 py-3 transition-all duration-300 ${
+                  isActive
+                    ? "scale-110 opacity-100"
+                    : "opacity-50 hover:opacity-90 hover:scale-105"
+                }`}
+              >
+                <span className="text-3xl sm:text-4xl leading-none">{flag}</span>
+                <span
+                  className={`text-[10px] tracking-[0.15em] font-medium ${
+                    isActive ? "text-[var(--brand-gold)]" : "text-muted-foreground"
+                  }`}
+                >
+                  {label}
+                </span>
+                {isActive && (
+                  <motion.span
+                    layoutId="active-flag-ring"
+                    className="absolute -bottom-1 h-1 w-8 rounded-full"
+                    style={{
+                      backgroundImage: "var(--gradient-gold)",
+                      boxShadow: "0 0 14px var(--brand-gold)",
+                    }}
+                  />
+                )}
+              </button>
+            );
+          })}
+        </motion.div>
+
+        <div className="mt-12 grid md:grid-cols-2 gap-6">
           {plans.map((p) => (
             <motion.div
               key={p.name}
@@ -464,17 +576,7 @@ function Pricing() {
               )}
               <h3 className="text-xl font-semibold">{p.name}</h3>
               <p className="text-sm text-muted-foreground mt-1">{p.sub}</p>
-              <div className="mt-6 flex items-end gap-2">
-                <span
-                  className={`text-6xl font-semibold tracking-tight ${
-                    p.featured ? "bg-clip-text text-transparent" : ""
-                  }`}
-                  style={p.featured ? { backgroundImage: "var(--gradient-gold)" } : undefined}
-                >
-                  {p.price}
-                </span>
-                <span className="text-muted-foreground mb-2">USD · pago único</span>
-              </div>
+              <PriceDisplay data={p.data} featured={p.featured} />
               <ul className="mt-8 space-y-3">
                 {p.features.map(({ icon: Icon, t }) => (
                   <li key={t} className="flex items-center gap-3">
