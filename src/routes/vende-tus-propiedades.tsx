@@ -92,12 +92,11 @@ function Hero() {
           transition={{ duration: 0.7, delay: 0.05 }}
           className="mt-8 text-center text-4xl sm:text-6xl lg:text-7xl font-semibold tracking-tight leading-[1.05]"
         >
-          Vende tu propiedad sin pagar
-          <br className="hidden sm:block" />{" "}
+          Vendé tu propiedad sin{" "}
           <span className="bg-clip-text text-transparent" style={{ backgroundImage: "var(--gradient-gold)" }}>
-            comisiones.
+            regalar tu dinero
           </span>{" "}
-          <span className="text-foreground/90">Maximiza tu ganancia.</span>
+          <span className="text-foreground/90">en comisiones.</span>
         </motion.h1>
 
         <motion.p
@@ -105,8 +104,8 @@ function Hero() {
           transition={{ duration: 0.7, delay: 0.1 }}
           className="mt-6 mx-auto max-w-2xl text-center text-base sm:text-lg text-muted-foreground"
         >
-          Deja de perder el tiempo con curiosos en Facebook. Digitaliza tu casa con un portal web
-          de lujo (SPW) y cierra el trato directo con el comprador ideal.
+          Tu casa no merece un post feo en Facebook. Digitaliza tu propiedad con un portal web de
+          lujo y atrae compradores reales, no mirones.
         </motion.p>
 
         <motion.div
@@ -116,11 +115,11 @@ function Hero() {
         >
           <a
             href="#precios"
-            className="group inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold text-primary-foreground shadow-[var(--shadow-gold)] hover:scale-[1.03] transition-all"
+            className="group inline-flex items-center gap-2 rounded-full px-8 py-4 text-base font-semibold text-primary-foreground shadow-[var(--shadow-gold)] hover:scale-[1.04] hover:shadow-[0_0_40px_var(--brand-gold)] transition-all duration-300"
             style={{ backgroundImage: "var(--gradient-gold)" }}
           >
-            Quiero vender más rápido
-            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            Empezar a vender ahora
+            <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
           </a>
           <a
             href="https://wa.me/50500000000"
