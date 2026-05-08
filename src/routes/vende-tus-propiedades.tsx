@@ -627,6 +627,7 @@ function VendeTusPropiedades() {
       <Navbar />
       <main>
         <Hero />
+        <PainPoints />
         <Comparison />
         <Benefits />
         <Steps />
