@@ -147,6 +147,16 @@ function Hero() {
             <MessageCircle className="h-5 w-5 text-[var(--brand-emerald)]" />
             Contactar por WhatsApp
           </a>
+          <a
+            href={mailtoLink(
+              "Quiero vender mi propiedad",
+              "Hola Sacuanjoche.dev,\n\nMe interesa publicar mi propiedad. ¿Cómo iniciamos?\n\nGracias.",
+            )}
+            className="inline-flex items-center justify-center gap-2 rounded-full border border-[var(--brand-gold)]/40 bg-card/40 px-7 py-4 text-base font-medium hover:bg-[var(--brand-gold)]/10 hover:border-[var(--brand-gold)] transition-all"
+          >
+            <Mail className="h-5 w-5 text-[var(--brand-gold)]" />
+            {CONTACT_EMAIL}
+          </a>
         </motion.div>
 
         <motion.div
