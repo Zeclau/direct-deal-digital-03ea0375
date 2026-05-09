@@ -25,6 +25,7 @@ import {
   Minus,
 } from "lucide-react";
 import { useState } from "react";
+import logoSacuanjoche from "@/assets/logo-sacuanjoche.png";
 
 export const Route = createFileRoute("/vende-tus-propiedades")({
   head: () => ({
@@ -57,8 +58,12 @@ function Navbar() {
   return (
     <header className="sticky top-0 z-50 backdrop-blur-xl bg-background/70 border-b border-border/50">
       <div className="mx-auto max-w-7xl px-6 lg:px-10 h-16 flex items-center justify-between">
-        <a href="#top" className="flex items-center gap-2 font-semibold tracking-tight">
-          <span className="h-2.5 w-2.5 rounded-full bg-[var(--brand-gold)] shadow-[0_0_18px_var(--brand-gold)]" />
+        <a href="#top" className="flex items-center gap-2.5 font-semibold tracking-tight group">
+          <img
+            src={logoSacuanjoche}
+            alt="Sacuanjoche.dev"
+            className="h-9 w-9 object-contain drop-shadow-[0_0_14px_var(--brand-gold)/40] transition-transform group-hover:scale-110"
+          />
           <span className="text-lg">
             Sacuanjoche<span className="text-[var(--brand-gold)]">.dev</span>
           </span>
@@ -688,8 +693,12 @@ function Footer() {
       <div className="mx-auto max-w-7xl px-6 lg:px-10 py-20">
         <div className="grid md:grid-cols-3 gap-10">
           <div>
-            <div className="flex items-center gap-2 font-semibold">
-              <span className="h-2.5 w-2.5 rounded-full bg-[var(--brand-gold)] shadow-[0_0_18px_var(--brand-gold)]" />
+            <div className="flex items-center gap-3 font-semibold">
+              <img
+                src={logoSacuanjoche}
+                alt="Sacuanjoche.dev"
+                className="h-12 w-12 object-contain drop-shadow-[0_0_18px_var(--brand-gold)/40]"
+              />
               <span className="text-lg">
                 Sacuanjoche<span className="text-[var(--brand-gold)]">.dev</span>
               </span>
