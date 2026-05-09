@@ -743,6 +743,25 @@ function Footer() {
   );
 }
 
+function FloatingWhatsApp() {
+  return (
+    <a
+      href={waLink("Hola Sacuanjoche.dev, quiero información para vender mi propiedad.")}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={`Escribir por WhatsApp a ${WHATSAPP_DISPLAY}`}
+      className="group fixed bottom-5 right-5 sm:bottom-7 sm:right-7 z-50 flex items-center gap-3 rounded-full pl-4 pr-5 py-3 text-sm font-semibold text-primary-foreground shadow-[var(--shadow-gold)] hover:scale-[1.04] hover:shadow-[0_0_40px_var(--brand-gold)] transition-all duration-300"
+      style={{ backgroundImage: "var(--gradient-gold)" }}
+    >
+      <span className="relative flex h-9 w-9 items-center justify-center rounded-full bg-background/20 backdrop-blur">
+        <span className="absolute inset-0 rounded-full bg-[var(--brand-emerald)]/40 animate-ping" />
+        <MessageCircle className="relative h-5 w-5" />
+      </span>
+      <span className="hidden sm:inline">WhatsApp</span>
+    </a>
+  );
+}
+
 function VendeTusPropiedades() {
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -757,6 +776,7 @@ function VendeTusPropiedades() {
         <FAQ />
       </main>
       <Footer />
+      <FloatingWhatsApp />
     </div>
   );
 }
