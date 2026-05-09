@@ -23,12 +23,16 @@ import {
   Zap,
   Plus,
   Minus,
+  Mail,
 } from "lucide-react";
 import { useState } from "react";
 import logoSacuanjoche from "@/assets/logo-sacuanjoche.png";
 
 const WHATSAPP_NUMBER = "50576514498";
 const WHATSAPP_DISPLAY = "+505 7651 4498";
+const CONTACT_EMAIL = "Ventas@sacuanjoche.dev";
+const mailtoLink = (subject: string, body: string) =>
+  `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 const waLink = (msg: string) =>
   `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
 
@@ -142,6 +146,16 @@ function Hero() {
           >
             <MessageCircle className="h-5 w-5 text-[var(--brand-emerald)]" />
             Contactar por WhatsApp
+          </a>
+          <a
+            href={mailtoLink(
+              "Quiero vender mi propiedad",
+              "Hola Sacuanjoche.dev,\n\nMe interesa publicar mi propiedad. ¿Cómo iniciamos?\n\nGracias.",
+            )}
+            className="inline-flex items-center justify-center gap-2 rounded-full border border-[var(--brand-gold)]/40 bg-card/40 px-7 py-4 text-base font-medium hover:bg-[var(--brand-gold)]/10 hover:border-[var(--brand-gold)] transition-all"
+          >
+            <Mail className="h-5 w-5 text-[var(--brand-gold)]" />
+            {CONTACT_EMAIL}
           </a>
         </motion.div>
 
@@ -723,15 +737,27 @@ function Footer() {
             >
               “Las personas no compran propiedades, compran decisiones bien presentadas.”
             </p>
-            <a
-              href={waLink("Hola Sacuanjoche.dev, quiero hablar sobre mi propiedad.")}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-6 inline-flex items-center gap-2 rounded-full border border-[var(--brand-emerald)]/40 px-5 py-2.5 text-sm hover:bg-[var(--brand-emerald)]/10 transition-all"
-            >
-              <MessageCircle className="h-4 w-4 text-[var(--brand-emerald)]" />
-              Hablemos por WhatsApp · {WHATSAPP_DISPLAY}
-            </a>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <a
+                href={waLink("Hola Sacuanjoche.dev, quiero hablar sobre mi propiedad.")}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-full border border-[var(--brand-emerald)]/40 px-5 py-2.5 text-sm hover:bg-[var(--brand-emerald)]/10 transition-all"
+              >
+                <MessageCircle className="h-4 w-4 text-[var(--brand-emerald)]" />
+                WhatsApp · {WHATSAPP_DISPLAY}
+              </a>
+              <a
+                href={mailtoLink(
+                  "Quiero vender mi propiedad",
+                  "Hola Sacuanjoche.dev,\n\nMe interesa publicar mi propiedad. ¿Cómo iniciamos?\n\nGracias.",
+                )}
+                className="inline-flex items-center gap-2 rounded-full border border-[var(--brand-gold)]/40 px-5 py-2.5 text-sm hover:bg-[var(--brand-gold)]/10 transition-all"
+              >
+                <Mail className="h-4 w-4 text-[var(--brand-gold)]" />
+                {CONTACT_EMAIL}
+              </a>
+            </div>
           </div>
         </div>
         <div className="mt-14 pt-6 border-t border-border/50 flex flex-col sm:flex-row justify-between gap-3 text-xs text-muted-foreground">
