@@ -27,6 +27,11 @@ import {
 import { useState } from "react";
 import logoSacuanjoche from "@/assets/logo-sacuanjoche.png";
 
+const WHATSAPP_NUMBER = "50576514498";
+const WHATSAPP_DISPLAY = "+505 7651 4498";
+const waLink = (msg: string) =>
+  `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
+
 export const Route = createFileRoute("/vende-tus-propiedades")({
   head: () => ({
     meta: [
@@ -130,10 +135,12 @@ function Hero() {
             <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
           </a>
           <a
-            href="https://wa.me/50500000000"
-            className="inline-flex items-center gap-2 rounded-full border border-[var(--brand-emerald)]/40 bg-card/40 px-7 py-3.5 text-sm font-semibold hover:bg-[var(--brand-emerald)]/10 hover:border-[var(--brand-emerald)] transition-all"
+            href={waLink("Hola Sacuanjoche.dev, quiero información para vender mi propiedad.")}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center gap-2 rounded-full border border-[var(--brand-emerald)]/40 bg-card/40 px-7 py-4 text-base font-medium hover:bg-[var(--brand-emerald)]/10 hover:border-[var(--brand-emerald)] transition-all"
           >
-            <MessageCircle className="h-4 w-4 text-[var(--brand-emerald)]" />
+            <MessageCircle className="h-5 w-5 text-[var(--brand-emerald)]" />
             Contactar por WhatsApp
           </a>
         </motion.div>
@@ -593,7 +600,9 @@ function Pricing() {
                 ))}
               </ul>
               <a
-                href="#contacto"
+                href={waLink(`Hola Sacuanjoche.dev, me interesa el ${p.name}. ¿Cómo iniciamos?`)}
+                target="_blank"
+                rel="noopener noreferrer"
                 className={`mt-10 inline-flex w-full items-center justify-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold transition-all hover:scale-[1.02] ${
                   p.featured
                     ? "text-primary-foreground shadow-[var(--shadow-gold)]"
@@ -715,11 +724,13 @@ function Footer() {
               “Las personas no compran propiedades, compran decisiones bien presentadas.”
             </p>
             <a
-              href="https://wa.me/50500000000"
+              href={waLink("Hola Sacuanjoche.dev, quiero hablar sobre mi propiedad.")}
+              target="_blank"
+              rel="noopener noreferrer"
               className="mt-6 inline-flex items-center gap-2 rounded-full border border-[var(--brand-emerald)]/40 px-5 py-2.5 text-sm hover:bg-[var(--brand-emerald)]/10 transition-all"
             >
               <MessageCircle className="h-4 w-4 text-[var(--brand-emerald)]" />
-              Hablemos por WhatsApp
+              Hablemos por WhatsApp · {WHATSAPP_DISPLAY}
             </a>
           </div>
         </div>
@@ -729,6 +740,25 @@ function Footer() {
         </div>
       </div>
     </footer>
+  );
+}
+
+function FloatingWhatsApp() {
+  return (
+    <a
+      href={waLink("Hola Sacuanjoche.dev, quiero información para vender mi propiedad.")}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={`Escribir por WhatsApp a ${WHATSAPP_DISPLAY}`}
+      className="group fixed bottom-5 right-5 sm:bottom-7 sm:right-7 z-50 flex items-center gap-3 rounded-full pl-4 pr-5 py-3 text-sm font-semibold text-primary-foreground shadow-[var(--shadow-gold)] hover:scale-[1.04] hover:shadow-[0_0_40px_var(--brand-gold)] transition-all duration-300"
+      style={{ backgroundImage: "var(--gradient-gold)" }}
+    >
+      <span className="relative flex h-9 w-9 items-center justify-center rounded-full bg-background/20 backdrop-blur">
+        <span className="absolute inset-0 rounded-full bg-[var(--brand-emerald)]/40 animate-ping" />
+        <MessageCircle className="relative h-5 w-5" />
+      </span>
+      <span className="hidden sm:inline">WhatsApp</span>
+    </a>
   );
 }
 
@@ -746,6 +776,7 @@ function VendeTusPropiedades() {
         <FAQ />
       </main>
       <Footer />
+      <FloatingWhatsApp />
     </div>
   );
 }
