@@ -138,13 +138,9 @@ function Hero() {
             href={waLink("Hola Sacuanjoche.dev, quiero información para vender mi propiedad.")}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 rounded-full border border-border/70 bg-card/40 px-7 py-4 text-base font-medium hover:bg-card/70 hover:border-[var(--brand-emerald)] transition-all"
+            className="inline-flex items-center justify-center gap-2 rounded-full border border-[var(--brand-emerald)]/40 bg-card/40 px-7 py-4 text-base font-medium hover:bg-[var(--brand-emerald)]/10 hover:border-[var(--brand-emerald)] transition-all"
           >
             <MessageCircle className="h-5 w-5 text-[var(--brand-emerald)]" />
-            Contactar por WhatsApp
-            className="inline-flex items-center gap-2 rounded-full border border-[var(--brand-emerald)]/40 bg-card/40 px-7 py-3.5 text-sm font-semibold hover:bg-[var(--brand-emerald)]/10 hover:border-[var(--brand-emerald)] transition-all"
-          >
-            <MessageCircle className="h-4 w-4 text-[var(--brand-emerald)]" />
             Contactar por WhatsApp
           </a>
         </motion.div>
